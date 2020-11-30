@@ -1,15 +1,16 @@
 cabal-version:       2.4
 
-name:                copilot-sin-demo
+name:                demo-arduino-copilot
 version:             0.1.0.0
 author:              Jakub Zárybnický
 maintainer:          jakub@zarybnicky.com
 build-type:          Simple
 
-executable sin
+executable demo-arduino-copilot
   main-is:             Main.hs
-  hs-source-dirs:      src
+  hs-source-dirs:      .
   default-language:    Haskell2010
+  ghc-options:        -Wall -Wcompat
   build-depends:       base >=4.13 && <4.14
                      , copilot
                      , copilot-c99

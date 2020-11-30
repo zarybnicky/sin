@@ -1,0 +1,22 @@
+* Copilot: Realtime Programming Language and Runtime Verification Framework
+
+** About
+
+** Principle
+
+** Example: Copilot
+
+*** Code
+
+*** Simulation
+- export + scaffold
+- TinkerCAD simulation
+- Ino demo
+
+** Example: Arduino-Copilot
+
+*** Code
+
+*** Simulation
+
+** Conclusion

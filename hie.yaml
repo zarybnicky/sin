@@ -1,8 +1,8 @@
 cradle:
   cabal:
-    - path: ./src
-      component: copilot-sin-demo
+    - path: ./demo-arduino-copilot
+      component: demo-arduino-copilot
+    - path: ./demo-copilot
+      component: demo-copilot
     - path: ./deps/bimap
       component: bimap
-    - path: ./arduino-examples
-      component: copilot-sin-demo

@@ -8,8 +8,10 @@
       inherit (final.haskell.lib) doJailbreak;
     in {
       overrides = pkgs.lib.composeExtensions (old.overrides or (_: _: {})) (hself: hsuper: {
-        copilot-sin-demo = hself.callCabal2nix "copilot-sin-demo" (getSrc ./.) {};
+        demo-arduino-copilot = hself.callCabal2nix "demo-arduino-copilot" (getSrc ./demo-arduino-copilot) {};
+        demo-copilot = hself.callCabal2nix "demo-copilot" (getSrc ./demo-copilot) {};
         arduino-copilot = hself.callHackage "arduino-copilot" "1.5.2" {};
+
         copilot = doJailbreak (hself.callHackage "copilot" "3.1" {});
         copilot-language = doJailbreak (hself.callHackage "copilot-language" "3.1" {});
         copilot-libraries = doJailbreak (hself.callHackage "copilot-libraries" "3.1" {});
@@ -23,10 +25,11 @@ in {
 
   shell = pkgs.haskellPackages.shellFor {
     withHoogle = true;
-    packages = p: [ p.copilot-sin-demo ];
+    packages = p: [ p.demo-copilot p.demo-arduino-copilot ];
     buildInputs = [
       pkgs.haskellPackages.cabal-install
       pkgs.haskellPackages.haskell-language-server
+      pkgs.ino
     ];
   };
 }
