@@ -4,21 +4,19 @@
   pkgs = import nixpkgs { overlays = [ overlay ]; };
   getSrc = gitignoreSourcePure [./.gitignore];
   overlay = final: prev: {
-    haskellPackages = prev.haskellPackages.override (old: let
-      inherit (final.haskell.lib) doJailbreak;
-    in {
-      overrides = pkgs.lib.composeExtensions (old.overrides or (_: _: {})) (hself: hsuper: {
+    haskell = prev.haskell // {
+      packageOverrides = prev.lib.composeExtensions (prev.haskell.packageOverrides or (_: _: {})) (hself: hsuper: {
         demo-arduino-copilot = hself.callCabal2nix "demo-arduino-copilot" (getSrc ./demo-arduino-copilot) {};
         demo-copilot = hself.callCabal2nix "demo-copilot" (getSrc ./demo-copilot) {};
         arduino-copilot = hself.callHackage "arduino-copilot" "1.5.2" {};
 
-        copilot = doJailbreak (hself.callHackage "copilot" "3.1" {});
-        copilot-language = doJailbreak (hself.callHackage "copilot-language" "3.1" {});
-        copilot-libraries = doJailbreak (hself.callHackage "copilot-libraries" "3.1" {});
-        copilot-theorem = doJailbreak (hself.callHackage "copilot-theorem" "3.1" {});
+        copilot = prev.haskell.lib.doJailbreak (hself.callHackage "copilot" "3.1" {});
+        copilot-language = prev.haskell.lib.doJailbreak (hself.callHackage "copilot-language" "3.1" {});
+        copilot-libraries = prev.haskell.lib.doJailbreak (hself.callHackage "copilot-libraries" "3.1" {});
+        copilot-theorem = prev.haskell.lib.doJailbreak (hself.callHackage "copilot-theorem" "3.1" {});
         bimap = hself.callCabal2nix "bimap" (getSrc ./deps/bimap) {};
       });
-    });
+    };
   };
 in {
   pkg = pkgs.haskellPackages.copilot-sin-demo;
